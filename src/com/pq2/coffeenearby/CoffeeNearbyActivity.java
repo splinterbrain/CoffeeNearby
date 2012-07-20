@@ -11,6 +11,7 @@ import android.graphics.drawable.PictureDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
@@ -26,6 +27,8 @@ import java.util.ArrayList;
 
 public class CoffeeNearbyActivity extends MapActivity implements View.OnClickListener, LocationListener {
     private final String TAG = "COFFEENEARBYACTIVITY";
+
+    ProgressDialog mSearching;
 
     private MapView mMapView;
     private LocationOverlay locationOverlay;
@@ -60,7 +63,7 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
 
 //        mBtnRefresh.setBackgroundDrawable(SVGParser.getSVGFromResource(getResources(), R.raw.noun_project_16).createPictureDrawable());
         mMapView = (MapView) findViewById(R.id.mapview);
-        mMapView.setOnClickListener(this);
+//        mMapView.setOnClickListener(this);
         mMapView.getController().setZoom(17);
         mMapView.getController().setCenter(mCurrentLocation.toGeoPoint());
 
@@ -74,7 +77,6 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
         coffeeOverlay = new CoffeeOverlay(coffeeDrawable, this);
 
         mMapView.getOverlays().add(locationOverlay);
-        mMapView.getOverlays().add(coffeeOverlay);
 
 
     }
@@ -92,19 +94,27 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
 
 
     protected void updateSearch() {
-        ProgressDialog mSearching = ProgressDialog.show(this, "Searching...", "Please wait", true);
-        coffeeLocations = PlacesApi.searchForPlaces(mCurrentLocation, "coffee");
+        if(mSearching != null && mSearching.isShowing()) return;
+        mSearching = ProgressDialog.show(this, "Searching...", "Please wait", true);
+        new UpdateSearchTask().execute();
+
+    }
+
+    protected void updateSearchCallback(Place[] places){
+        coffeeLocations = places;
         Log.v(TAG, coffeeLocations.length + " locations found");
         updateCoffeeMarkers();
         mSearching.dismiss();
-
     }
 
     protected void updateCoffeeMarkers() {
         coffeeOverlay.clearAll();
         for (int i = 0; i < coffeeLocations.length; i++) {
             coffeeOverlay.addOverlay(new OverlayItem(coffeeLocations[i].toGeoPoint(), coffeeLocations[i].getName(), coffeeLocations[i].getAddress()));
+            mMapView.invalidate();
         }
+        //We have to add this only once we have items, otherwise a tap crashes the app
+        if(!mMapView.getOverlays().contains(coffeeOverlay)) mMapView.getOverlays().add(coffeeOverlay);
     }
 
     protected void updateLocationMarker() {
@@ -235,4 +245,16 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
         }
     }
 
+    private class UpdateSearchTask extends AsyncTask<Integer, Integer, Place[]>{
+
+        @Override
+        protected Place[] doInBackground(Integer... Integers) {
+            return PlacesApi.searchForPlaces(mCurrentLocation, "coffee");
+        }
+
+        @Override
+        protected void onPostExecute(Place[] places) {
+            CoffeeNearbyActivity.this.updateSearchCallback(places);
+        }
+    }
 }
