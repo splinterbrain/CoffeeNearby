@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <Button android:layout_width="fill_parent"
+            android:layout_height="20pt"
+            android:clickable="true"
+            android:id="@+id/gps_button"
+            android:text="@string/gps"
+            android:visibility="gone"
+            />
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="20pt"
+            >
+        <Button android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:clickable="true"
+                android:id="@+id/refresh_button"
+                android:text="@string/refresh"/>
+    </LinearLayout>
+    <com.google.android.maps.MapView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mapview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:apiKey="0cca3rHoU-kAXsM83_lxqpPrpYhKu3-97E8VICA"
+            android:clickable="true">
+
+    </com.google.android.maps.MapView>
+</LinearLayout>
+
