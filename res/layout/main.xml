@@ -23,8 +23,8 @@
                 android:id="@+id/refresh_coffee"
                 android:text="@string/refresh_coffee"
                 android:drawableLeft="@drawable/coffee_small"
-                android:drawablePadding="-3pt"
-                android:paddingLeft="6pt"
+                android:drawablePadding="-4pt"
+                android:paddingLeft="4pt"
                 />
 
         <Button android:layout_width="fill_parent"

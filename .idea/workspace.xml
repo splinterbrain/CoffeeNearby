@@ -3,7 +3,7 @@
   <component name="AndroidLayoutPreviewToolWindow">
     <option name="state">
       <GlobalState>
-        <option name="device" value="4.65in 720p (Galaxy Nexus)" />
+        <option name="device" value="2.7in QVGA" />
         <option name="dockMode" value="" />
         <option name="nightMode" value="notnight" />
         <option name="targetHashString" value="android-8" />
@@ -13,22 +13,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5eef7ddc-bf30-45e3-a42d-092420f8f444" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable/coffee.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable/marker.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/raw/icon.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/raw/noun_project_16.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/raw/noun_project_1670.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/raw/noun_project_462.svg" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raw/coffeeNearby.psd" afterPath="$PROJECT_DIR$/raw/coffeeNearby.psd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raw/ic_launcher_512.png" afterPath="$PROJECT_DIR$/raw/ic_launcher_512.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/coffee_small.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/coffee_small.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-ldpi/coffee_small.png" afterPath="$PROJECT_DIR$/res/drawable-ldpi/coffee_small.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-ldpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-ldpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/coffee_small.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/coffee_small.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/coffee_small.png" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/coffee_small.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/pq2/coffeenearby/R.java" afterPath="$PROJECT_DIR$/gen/com/pq2/coffeenearby/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pq2/coffeenearby/CoffeeNearbyActivity.java" afterPath="$PROJECT_DIR$/src/com/pq2/coffeenearby/CoffeeNearbyActivity.java" />
     </list>
     <ignored path="CoffeeNearby.iws" />
@@ -92,10 +88,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="43" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.0">
+            <state line="25" column="43" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.27440634">
               <folding />
             </state>
           </provider>
@@ -104,25 +100,9 @@
       <file leaf-file-name="CoffeeNearbyActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/pq2/coffeenearby/CoffeeNearbyActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="139" column="28" selection-start="5144" selection-end="5144" vertical-scroll-proportion="0.0">
+            <state line="138" column="30" selection-start="5202" selection-end="5202" vertical-scroll-proportion="0.0">
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="20" selection-end="20" vertical-scroll-proportion="0.114795916">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ic_launcher.png" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
@@ -186,9 +166,9 @@
         <option value="$PROJECT_DIR$/src/com/pq2/coffeenearby/PlacesApi.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/res/layout/main.xml" />
-        <option value="$PROJECT_DIR$/src/com/pq2/coffeenearby/CoffeeNearbyActivity.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/com/pq2/coffeenearby/CoffeeNearbyActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/main.xml" />
       </list>
     </option>
   </component>
@@ -419,7 +399,7 @@
     <property name="recentsLimit" value="5" />
     <property name="ExportedModule" value="CoffeeNearby" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="A0000028D1C642" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -654,11 +634,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1276" height="778" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.6712329" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899022" sideWeight="0.6712329" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32899022" sideWeight="0.6712329" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -799,23 +779,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="43" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.0">
+        <state line="3" column="0" selection-start="20" selection-end="20" vertical-scroll-proportion="0.114795916">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Developer/SDKs/android-sdk-macosx/platforms/android-8/android.jar!/java/io/FileInputStream.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="0" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Developer/SDKs/android-sdk-macosx/platforms/android-8/android.jar!/java/lang/reflect/Method.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="0" selection-start="2132" selection-end="2132" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pq2/coffeenearby/CoffeeNearbyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="28" selection-start="5144" selection-end="5144" vertical-scroll-proportion="0.0">
+        <state line="138" column="30" selection-start="5202" selection-end="5202" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="20" selection-end="20" vertical-scroll-proportion="0.114795916">
+        <state line="25" column="43" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.27440634">
           <folding />
         </state>
       </provider>

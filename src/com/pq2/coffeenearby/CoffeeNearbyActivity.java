@@ -133,12 +133,16 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
     protected void handleGpsTimeout(){
         Log.v(TAG, "GPS timed out, falling over to network");
         mLocationManager.removeUpdates(this);
-        mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+        if(mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+            mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+        }else{
+            alertNoLocation();
+        }
     }
 
     protected void alertNoLocation(){
         mLocating.dismiss();
-        Toast.makeText(this, "Unable to find location", 3);
+        Toast.makeText(this, "Unable to find location", 3).show();
     }
 
 
