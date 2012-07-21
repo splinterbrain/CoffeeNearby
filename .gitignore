@@ -1,2 +1,4 @@
 out
 *.apk
+.DS_Store
+

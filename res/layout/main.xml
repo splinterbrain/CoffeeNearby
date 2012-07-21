@@ -13,13 +13,30 @@
             />
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="fill_parent"
-                  android:layout_height="20pt"
+                  android:layout_height="24pt"
+                  android:paddingTop="2pt"
             >
         <Button android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:layout_weight="1.0"
                 android:clickable="true"
-                android:id="@+id/refresh_button"
-                android:text="@string/refresh"/>
+                android:id="@+id/refresh_coffee"
+                android:text="@string/refresh_coffee"
+                android:drawableLeft="@drawable/coffee_small"
+                android:drawablePadding="-3pt"
+                android:paddingLeft="6pt"
+                />
+
+        <Button android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:clickable="true"
+                android:id="@+id/refresh_location"
+                android:text="@string/refresh_location"
+                android:drawableLeft="@drawable/marker_small"
+                android:drawablePadding="-6pt"
+                android:paddingLeft="12pt"
+                />
     </LinearLayout>
     <com.google.android.maps.MapView
             xmlns:android="http://schemas.android.com/apk/res/android"

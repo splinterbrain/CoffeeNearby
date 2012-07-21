@@ -1,11 +1,15 @@
 package com.pq2.coffeenearby;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.location.Location;
@@ -13,6 +17,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.text.Html;
 import android.util.Log;
@@ -28,13 +34,18 @@ import java.util.ArrayList;
 public class CoffeeNearbyActivity extends MapActivity implements View.OnClickListener, LocationListener {
     private final String TAG = "COFFEENEARBYACTIVITY";
 
-    ProgressDialog mSearching;
+    private Handler mHandler;
+    private final static int MSG_GPS_TIMEOUT = 0;
+
+    private ProgressDialog mSearching;
+    private ProgressDialog mLocating;
 
     private MapView mMapView;
     private LocationOverlay locationOverlay;
     private CoffeeOverlay coffeeOverlay;
 
-    private Button mBtnRefresh;
+    private Button mBtnRefreshCoffee;
+    private Button mBtnRefreshLocation;
     private Button mBtnGps;
     private LocationManager mLocationManager;
     private final Place mCurrentLocation = new Place(45.52, -122.681944, "You are here", "");
@@ -48,14 +59,27 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        mHandler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == MSG_GPS_TIMEOUT){
+                    CoffeeNearbyActivity.this.handleGpsTimeout();
+                }
+            }
+        };
+
         //Register for location
         mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
-        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
-        //Refresh button
-        mBtnRefresh = ((Button) findViewById(R.id.refresh_button));
-        mBtnRefresh.setOnClickListener(this);
+        //Refresh Coffee button
+        mBtnRefreshCoffee = ((Button) findViewById(R.id.refresh_coffee));
+        mBtnRefreshCoffee.setOnClickListener(this);
+
+
+        //Refresh location button
+        mBtnRefreshLocation = ((Button) findViewById(R.id.refresh_location));
+        mBtnRefreshLocation.setOnClickListener(this);
+
 
         //GPS button
         mBtnGps = ((Button) findViewById(R.id.gps_button));
@@ -73,12 +97,13 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
         Drawable markerDrawable = getResources().getDrawable(R.drawable.marker);
         Drawable coffeeDrawable = getResources().getDrawable(R.drawable.coffee);
 
+
         locationOverlay = new LocationOverlay(markerDrawable, mCurrentLocation.toGeoPoint(), "You are here");
         coffeeOverlay = new CoffeeOverlay(coffeeDrawable, this);
 
         mMapView.getOverlays().add(locationOverlay);
 
-
+        this.requestLocationUpdate();
     }
 
     @Override
@@ -92,15 +117,39 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
 
     }
 
+    protected void requestLocationUpdate() {
+        if(mLocating != null && mLocating.isShowing()) return;
+        mLocating = ProgressDialog.show(this, "Finding location...", "Please wait", true);
+        if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            mHandler.sendEmptyMessageDelayed(MSG_GPS_TIMEOUT, 10000);
+        } else if(mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+        }else{
+             this.alertNoLocation();
+        }
+    }
+
+    protected void handleGpsTimeout(){
+        Log.v(TAG, "GPS timed out, falling over to network");
+        mLocationManager.removeUpdates(this);
+        mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+    }
+
+    protected void alertNoLocation(){
+        mLocating.dismiss();
+        Toast.makeText(this, "Unable to find location", 3);
+    }
+
 
     protected void updateSearch() {
-        if(mSearching != null && mSearching.isShowing()) return;
+        if (mSearching != null && mSearching.isShowing()) return;
         mSearching = ProgressDialog.show(this, "Searching...", "Please wait", true);
         new UpdateSearchTask().execute();
 
     }
 
-    protected void updateSearchCallback(Place[] places){
+    protected void updateSearchCallback(Place[] places) {
         coffeeLocations = places;
         Log.v(TAG, coffeeLocations.length + " locations found");
         updateCoffeeMarkers();
@@ -114,7 +163,7 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
             mMapView.invalidate();
         }
         //We have to add this only once we have items, otherwise a tap crashes the app
-        if(!mMapView.getOverlays().contains(coffeeOverlay)) mMapView.getOverlays().add(coffeeOverlay);
+        if (!mMapView.getOverlays().contains(coffeeOverlay)) mMapView.getOverlays().add(coffeeOverlay);
     }
 
     protected void updateLocationMarker() {
@@ -133,8 +182,11 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
                 Intent intent = new Intent(Settings.ACTION_SECURITY_SETTINGS);
                 startActivity(intent);
                 break;
-            case R.id.refresh_button:
+            case R.id.refresh_coffee:
                 this.updateSearch();
+                break;
+            case R.id.refresh_location:
+                this.requestLocationUpdate();
                 break;
             case R.id.mapview:
                 break;
@@ -144,15 +196,24 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
     @Override
     public void onLocationChanged(Location location) {
         //TODO:Update running average of location and replace marker
+        Log.v(TAG, "Location updated " + location.getLatitude() + ", " + location.getLongitude());
         mCurrentLocation.setLatitude(location.getLatitude());
         mCurrentLocation.setLongitude(location.getLongitude());
-        if (coffeeLocations.length == 0) this.updateSearch();
+
+        mLocating.dismiss();
+
+        if (coffeeLocations == null) this.updateSearch();
 
         //Update overlays
         locationOverlay.updateLocation(mCurrentLocation.toGeoPoint());
 
         //Zoom to location
         mMapView.getController().animateTo(mCurrentLocation.toGeoPoint());
+
+        mMapView.postInvalidate();
+
+        //TODO:Make it an option to update constantly
+        mLocationManager.removeUpdates(this);
 
     }
 
@@ -245,7 +306,7 @@ public class CoffeeNearbyActivity extends MapActivity implements View.OnClickLis
         }
     }
 
-    private class UpdateSearchTask extends AsyncTask<Integer, Integer, Place[]>{
+    private class UpdateSearchTask extends AsyncTask<Integer, Integer, Place[]> {
 
         @Override
         protected Place[] doInBackground(Integer... Integers) {

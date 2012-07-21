@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Coffee Nearby</string>
-    <string name="refresh">Find my coffee!</string>
+    <string name="refresh_coffee">Find coffee!</string>
+    <string name="refresh_location">Find me!</string>
     <string name="gps">For best results, Enable GPS</string>
 </resources>
